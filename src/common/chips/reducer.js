@@ -18,7 +18,7 @@ export default function chipsReducer(state = initialState, action) {
   switch (action.type) {
 
     case actions.ADD_CHIP: {
-      console.log(action.payload);
+      console.log('add', action.payload);
       const newChip = new Chip({
         stackId: action.payload.stackId,
         color: action.payload.color,

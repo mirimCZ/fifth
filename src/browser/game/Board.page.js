@@ -3,6 +3,7 @@ import React, {PropTypes} from 'react'
 import immutable from 'immutable'
 import Helmet from 'react-helmet'
 import ColorPicker from './ColorPicker.react'
+import ChipList from './ChipList.react'
 
 if (process.env.IS_BROWSER)
   require('./Board.styl')
@@ -20,7 +21,7 @@ export default class Board extends Component {
         stacks: new immutable.List(['center', 'top-right', 'bottom-right', 'bottom-left', 'top-left'])
       }
     ])
-
+console.log(chips.get('list').toObject());
     return (
       <div className='board'>
         <Helmet title='Fifth Element Board Game'></Helmet>
@@ -38,7 +39,9 @@ export default class Board extends Component {
                     key={stackId}
                     className={'chip-stack ' + position}
                     onClick={() => actions.openColorPicker(stackId)}
-                    ></div>
+                    >
+                      <ChipList chips={chips.get('list').filter(chip => chip.get('stackId') === stackId)}></ChipList>
+                    </div>
                 )
               })}
             </div>
