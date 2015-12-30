@@ -1,6 +1,7 @@
 export const ON_SIDE_MENU_CHANGE = 'ON_SIDE_MENU_CHANGE';
 export const TOGGLE_SIDE_MENU = 'TOGGLE_SIDE_MENU';
 export const OPEN_COLOR_PICKER = 'OPEN_COLOR_PICKER';
+export const CLOSE_COLOR_PICKER = 'CLOSE_COLOR_PICKER';
 
 export function onSideMenuChange(isOpen) {
   return {
@@ -15,9 +16,15 @@ export function toggleSideMenu() {
   };
 }
 
-export function openColorPicker(containerIndex, position, stackId) {
+export function openColorPicker(stackId) {
   return {
     type: OPEN_COLOR_PICKER,
-    payload: {containerIndex, position, stackId}
+    payload: {stackId}
+  };
+}
+
+export function closeColorPicker() {
+  return {
+    type: CLOSE_COLOR_PICKER,
   };
 }

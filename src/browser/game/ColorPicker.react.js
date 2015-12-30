@@ -7,12 +7,12 @@ if (process.env.IS_BROWSER)
 
 export default class ColorPicker extends Component {
   render() {
-    const {isOpen, position, stackId, actions} = this.props
+    const {isOpen, stackId, actions} = this.props
     const colors = ['red', 'green', 'blue', 'yellow']
 
     return (
       <div
-        className={'color-picker picker-' + position}
+        className='color-picker'
         // REFACTOR: move this to classes
         style={{
           visibility: isOpen ? 'visible' : 'hidden'
@@ -25,6 +25,15 @@ export default class ColorPicker extends Component {
               onClick={() => actions.addChip(stackId, color)}
               ></div>
           )}
+
+        <div style={{clear: 'both'}}></div>
+
+        <div
+          onClick={() => actions.closeColorPicker()}
+          className='close'
+          >
+          Zavřít
+        </div>
       </div>
     )
   }

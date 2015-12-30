@@ -3,13 +3,13 @@ import Chip from './Chip';
 import {Map, List, Record} from 'immutable';
 
 const InitialState = Record({
-  map: Map(),
+  list: List(),
 });
 const initialState = new InitialState;
 
 // Note how JSON from server is revived to immutable record.
-const revive = ({map, newTodo}) => initialState.merge({
-  map: Map(map).map(chip => new Chip(chip)),
+const revive = ({list}) => initialState.merge({
+  list: List(list).map(chip => new Chip(chip)),
 });
 
 export default function chipsReducer(state = initialState, action) {
@@ -18,6 +18,7 @@ export default function chipsReducer(state = initialState, action) {
   switch (action.type) {
 
     case actions.ADD_CHIP: {
+      console.log(action.payload);
       const newChip = new Chip({
         stackId: action.payload.stackId,
         color: action.payload.color,

@@ -12,7 +12,7 @@ export default class Board extends Component {
     const {chips, ui: {colorPicker}, actions} = this.props
     const positions = new immutable.List([
       {
-        className: 'chip-container-rotated',
+        className: 'chip-stack-container-rotated',
         stacks: new immutable.List(['top-left', 'top-right', 'bottom-left', 'bottom-right'])
       },
       {
@@ -20,25 +20,24 @@ export default class Board extends Component {
         stacks: new immutable.List(['center', 'top-right', 'bottom-right', 'bottom-left', 'top-left'])
       }
     ])
-    let stackId = 1
 
     return (
       <div className='board'>
         <Helmet title='Fifth Element Board Game'></Helmet>
 
-        <div className='chip-stack-container'>
+        <div className='core-container'>
           {positions.map((chipContainer, containerIndex) =>
             <div
               key={containerIndex}
-              className={'chip-container ' + chipContainer.className}
+              className={'chip-stack-container ' + chipContainer.className}
               >
-              {chipContainer.stacks.map(position => {
-                stackId++
+              {chipContainer.stacks.map((position, key) => {
+                const stackId = parseInt(containerIndex + '' + key)
                 return (
                   <div
                     key={stackId}
                     className={'chip-stack ' + position}
-                    onClick={() => actions.openColorPicker(containerIndex, position, stackId)}
+                    onClick={() => actions.openColorPicker(stackId)}
                     ></div>
                 )
               })}
@@ -47,7 +46,6 @@ export default class Board extends Component {
 
           <ColorPicker
             isOpen={colorPicker.open}
-            position={colorPicker.position}
             stackId={colorPicker.stackId}
             actions={actions}
             ></ColorPicker>

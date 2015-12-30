@@ -1,11 +1,11 @@
 import * as actions from './actions';
+import * as chipActions from '../chips/actions'
 import {Record} from 'immutable';
 
 const InitialState = Record({
   isSideMenuOpen: false,
   colorPicker: {
     open: false,
-    position: '',
     stackId: 0,
   },
 });
@@ -22,13 +22,18 @@ export default function uiReducer(state = initialState, action) {
     }
 
     case actions.OPEN_COLOR_PICKER: {
-      const {containerIndex, position, stackId} = action.payload
-      const newColorPicker = {
+      return state.set('colorPicker', {
         open: true,
-        position: containerIndex + '-' + position,
-        stackId: stackId,
-      }
-      return state.set('colorPicker', newColorPicker)
+        stackId: action.payload.stackId,
+      })
+    }
+
+    case actions.CLOSE_COLOR_PICKER:
+    case chipActions.ADD_CHIP: {
+      return state.set('colorPicker', {
+        open: false,
+        stackId: 0,
+      })
     }
 
     case actions.TOGGLE_SIDE_MENU:
