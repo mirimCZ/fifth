@@ -14,7 +14,7 @@ export default class Footer extends Component {
     return (
       <footer>
         <p>
-          <FormattedHTMLMessage defaultMessage={msg.madeByHtml} />
+          Made by <a href="http://www.betterhen.cz" target="_blank">betterhen.cz</a>
         </p>
       </footer>
     );
