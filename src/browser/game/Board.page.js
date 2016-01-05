@@ -11,41 +11,37 @@ if (process.env.IS_BROWSER)
 export default class Board extends Component {
   render() {
     const {chips, ui: {colorPicker}, actions} = this.props
-    const positions = new immutable.List([
-      {
-        className: 'chip-stack-container-rotated',
-        stacks: new immutable.List(['top-left', 'top-right', 'bottom-left', 'bottom-right'])
-      },
-      {
-        className: '',
-        stacks: new immutable.List(['center', 'top-right', 'bottom-right', 'bottom-left', 'top-left'])
-      }
-    ])
-console.log(chips.get('list').toObject());
+    const stack1 = new immutable.List(['top-left', 'top-right', 'bottom-left', 'bottom-right'])
+    const stack2 = new immutable.List(['center', 'top-right', 'bottom-right', 'bottom-left', 'top-left'])
+
     return (
       <div className='board'>
         <Helmet title='Fifth Element Board Game'></Helmet>
 
         <div className='core-container'>
-          {positions.map((chipContainer, containerIndex) =>
-            <div
-              key={containerIndex}
-              className={'chip-stack-container ' + chipContainer.className}
-              >
-              {chipContainer.stacks.map((position, key) => {
-                const stackId = parseInt(containerIndex + '' + key)
-                return (
-                  <div
-                    key={stackId}
-                    className={'chip-stack ' + position}
-                    onClick={() => actions.openColorPicker(stackId)}
-                    >
-                      <ChipList chips={chips.get('list').filter(chip => chip.get('stackId') === stackId)}></ChipList>
-                    </div>
-                )
-              })}
+          <div className='chip-stack-container'>
+            {stack1.map((position, key) =>
+              <div
+                key={parseInt([0, key].join(''))}
+                className={'chip-stack ' + position}
+                onClick={() => actions.openColorPicker(stackId)}
+                >
+                  <ChipList chips={chips.get('list').filter(chip => chip.get('stackId') === stackId)}></ChipList>
+              </div>
+            )}
+
+            <div className='chip-stack-container chip-stack-container-rotated'>
+              {stack2.map((position, key) =>
+                <div
+                  key={parseInt([1, key].join(''))}
+                  className={'chip-stack ' + position}
+                  onClick={() => actions.openColorPicker(stackId)}
+                  >
+                    <ChipList chips={chips.get('list').filter(chip => chip.get('stackId') === stackId)}></ChipList>
+                </div>
+              )}
             </div>
-          )}
+          </div>
 
           <ColorPicker
             isOpen={colorPicker.open}
