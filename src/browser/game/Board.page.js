@@ -20,26 +20,33 @@ export default class Board extends Component {
 
         <div className='core-container'>
           <div className='chip-stack-container'>
-            {stack1.map((position, key) =>
-              <div
-                key={parseInt([0, key].join(''))}
-                className={'chip-stack ' + position}
-                onClick={() => actions.openColorPicker(stackId)}
-                >
-                  <ChipList chips={chips.get('list').filter(chip => chip.get('stackId') === stackId)}></ChipList>
-              </div>
-            )}
-
-            <div className='chip-stack-container chip-stack-container-rotated'>
-              {stack2.map((position, key) =>
+            {stack1.map((position, key) => {
+              const stackId = parseInt([0, key].join(''))
+              return (
                 <div
-                  key={parseInt([1, key].join(''))}
+                  key={stackId}
                   className={'chip-stack ' + position}
                   onClick={() => actions.openColorPicker(stackId)}
                   >
                     <ChipList chips={chips.get('list').filter(chip => chip.get('stackId') === stackId)}></ChipList>
-                </div>
-              )}
+                  </div>
+              )
+            })}
+
+
+            <div className='chip-stack-container chip-stack-container-rotated'>
+              {stack2.map((position, key) => {
+                const stackId = parseInt([1, key].join(''))
+                return (
+                  <div
+                    key={stackId}
+                    className={'chip-stack ' + position}
+                    onClick={() => actions.openColorPicker(stackId)}
+                    >
+                      <ChipList chips={chips.get('list').filter(chip => chip.get('stackId') === stackId)}></ChipList>
+                    </div>
+                )
+              })}
             </div>
           </div>
 
