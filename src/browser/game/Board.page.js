@@ -28,9 +28,21 @@ export default class Board extends Component {
         <div className='hand-container'>
           {cards.map(colors =>
             <div className='card'>
-              {colors.map(color =>
-                <div className={'chip chip-' + color}></div>
-              )}
+              <div className='actions'>
+                <button className='discard'>x</button>
+                <button className='play'>></button>
+              </div>
+
+              <div className='head'>
+                <div className={'chip chip-' + colors[0]}></div>
+              </div>
+
+              <div className='lower'>
+                <div className={'chip chip-' + colors[1]}></div>
+                <div className={'chip chip-' + colors[2]}></div>
+                <div className={'chip chip-' + colors[3]}></div>
+              </div>
+
             </div>
           )}
         </div>
