@@ -27,6 +27,14 @@ export default function chipsReducer(state = initialState, action) {
         .update('list', list => list.push(newChip))
     }
 
+    case actions.PLAY_CARD: {
+      // check head color in stack
+      // check sequence:
+      // find second color, if found, try to find second, then third
+      
+      return state
+    }
+
 
   }
 

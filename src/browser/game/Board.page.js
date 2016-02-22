@@ -26,13 +26,12 @@ export default class Board extends Component {
         <Helmet title='Fifth Element Board Game'></Helmet>
 
         <div className='hand-container'>
-          {cards.map(colors =>
-            <div className='card'>
-              <div className='actions'>
-                <button className='discard'>x</button>
-                <button className='play'>></button>
-              </div>
-
+          {cards.map((colors, index) =>
+            <div
+              key={index}
+              className='card'
+              onClick={() => actions.playCard(colors)}
+              >
               <div className='head'>
                 <div className={'chip chip-' + colors[0]}></div>
               </div>
@@ -54,6 +53,7 @@ export default class Board extends Component {
               return (
                 <div
                   key={stackId}
+                  id={'stack-' + stackId}
                   className={'chip-stack ' + position}
                   onClick={() => actions.openColorPicker(stackId)}
                   >
@@ -69,6 +69,7 @@ export default class Board extends Component {
                 return (
                   <div
                     key={stackId}
+                    id={'stack-' + stackId}
                     className={'chip-stack ' + position}
                     onClick={() => actions.openColorPicker(stackId)}
                     >

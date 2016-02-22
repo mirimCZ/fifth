@@ -6,10 +6,19 @@ export const FETCH_CHIPS_ERROR = 'FETCH_CHIPS_ERROR'
 export const FETCH_CHIPS_START = 'FETCH_CHIPS_START'
 export const FETCH_CHIPS_SUCCESS = 'FETCH_CHIPS_SUCCESS'
 
+export const PLAY_CARD = 'PLAY_CARD'
+
 export function addChip(stackId, color) {
   return {
     type: ADD_CHIP,
     payload: {stackId, color}
+  };
+}
+
+export function playCard(card) {
+  return {
+    type: PLAY_CARD,
+    payload: {card}
   };
 }
 
