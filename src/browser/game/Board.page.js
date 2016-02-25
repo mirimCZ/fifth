@@ -16,9 +16,9 @@ export default class Board extends Component {
     const stack1 = new immutable.List(['top-left', 'top-right', 'bottom-left', 'bottom-right'])
     const stack2 = new immutable.List(['center', 'top-right', 'bottom-right', 'bottom-left', 'top-left'])
     const cards = new immutable.List([
-      ['yellow', 'red', 'blue', 'green'],
-      ['red', 'yellow', 'green', 'blue'],
-      ['blue', 'yellow', 'red', 'green'],
+      new immutable.List(['yellow', 'red', 'blue', 'green']),
+      new immutable.List(['red', 'yellow', 'green', 'blue']),
+      new immutable.List(['blue', 'yellow', 'red', 'green']),
     ])
 
     return (
@@ -33,13 +33,13 @@ export default class Board extends Component {
               onClick={() => actions.playCard(colors)}
               >
               <div className='head'>
-                <div className={'chip chip-' + colors[0]}></div>
+                <div className={'chip chip-' + colors.get(0)}></div>
               </div>
 
               <div className='lower'>
-                <div className={'chip chip-' + colors[1]}></div>
-                <div className={'chip chip-' + colors[2]}></div>
-                <div className={'chip chip-' + colors[3]}></div>
+                <div className={'chip chip-' + colors.get(1)}></div>
+                <div className={'chip chip-' + colors.get(2)}></div>
+                <div className={'chip chip-' + colors.get(3)}></div>
               </div>
 
             </div>
