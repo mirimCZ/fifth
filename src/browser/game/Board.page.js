@@ -49,31 +49,30 @@ export default class Board extends Component {
         <div className='core-container'>
           <div className='chip-stack-container'>
             {stack1.map((position, key) => {
-              const stackId = parseInt([0, key].join(''))
+              const stackId = parseInt([1, key].join(''))
               return (
                 <div
                   key={stackId}
-                  id={'stack-' + stackId}
+                  id={'stack' + stackId}
                   className={'chip-stack ' + position}
                   onClick={() => actions.openColorPicker(stackId)}
                   >
-                    <ChipList chips={chips.get('list').filter(chip => chip.get('stackId') === stackId)}></ChipList>
+                    <ChipList chips={chips.getIn(['map', 'stack' + stackId])}></ChipList>
                   </div>
               )
             })}
 
-
             <div className='chip-stack-container chip-stack-container-rotated'>
               {stack2.map((position, key) => {
-                const stackId = parseInt([1, key].join(''))
+                const stackId = parseInt([2, key].join(''))
                 return (
                   <div
                     key={stackId}
-                    id={'stack-' + stackId}
+                    id={'stack' + stackId}
                     className={'chip-stack ' + position}
                     onClick={() => actions.openColorPicker(stackId)}
                     >
-                      <ChipList chips={chips.get('list').filter(chip => chip.get('stackId') === stackId)}></ChipList>
+                      <ChipList chips={chips.getIn(['map', 'stack' + stackId])}></ChipList>
                     </div>
                 )
               })}
