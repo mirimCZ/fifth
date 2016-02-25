@@ -6,7 +6,7 @@ const InitialState = Record({
   map: Map({
     stack10: new List(),
     stack11: new List([
-      new Chip({stackId: 20, color: 'green'})
+      new Chip({stackId: 11, color: 'green'})
     ]),
     stack12: new List(),
     stack13: new List(),
@@ -14,12 +14,12 @@ const InitialState = Record({
       new Chip({stackId: 20, color: 'yellow'})
     ]), // head stack
     stack21: new List([
-      new Chip({stackId: 20, color: 'blue'})
+      new Chip({stackId: 21, color: 'blue'})
     ]),
     stack22: new List(),
     stack23: new List(),
     stack24: new List([
-      new Chip({stackId: 20, color: 'red'})
+      new Chip({stackId: 24, color: 'red'})
     ]),
   }),
   stacksOrder: new List([24, 10, 23, 12, 22, 13, 21, 11])
@@ -78,8 +78,7 @@ export default function chipsReducer(state = initialState, action) {
 
         if (matchingChips.size < 3) {
           // colors dont match
-          console.log('wrong');
-          //return state
+          return state
         }
 
 
@@ -88,9 +87,6 @@ export default function chipsReducer(state = initialState, action) {
 
 
       }
-      // check head color in stack
-      // check sequence:
-      // find second color, if found, try to find second, then third
 
       return state
     }
