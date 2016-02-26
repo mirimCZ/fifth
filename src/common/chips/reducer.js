@@ -22,7 +22,31 @@ const InitialState = Record({
       new Chip({stackId: 24, color: 'red'})
     ]),
   }),
-  stacksOrder: new List([24, 10, 23, 12, 22, 13, 21, 11])
+  stacksOrder: new List([24, 10, 23, 12, 22, 13, 21, 11]),
+
+  playCards: new List([
+    new List(['yellow', 'red', 'blue', 'green']),
+    new List(['red', 'yellow', 'green', 'blue']),
+    new List(['blue', 'yellow', 'red', 'green']),
+    new List(['yellow', 'red', 'blue', 'green']),
+    new List(['red', 'yellow', 'green', 'blue']),
+    new List(['blue', 'yellow', 'red', 'green']),
+    new List(['yellow', 'red', 'blue', 'green']),
+    new List(['red', 'yellow', 'green', 'blue']),
+    new List(['blue', 'yellow', 'red', 'green']),
+    new List(['yellow', 'red', 'blue', 'green']),
+    new List(['red', 'yellow', 'green', 'blue']),
+    new List(['blue', 'yellow', 'red', 'green']),
+    new List(['yellow', 'red', 'blue', 'green']),
+    new List(['red', 'yellow', 'green', 'blue']),
+    new List(['blue', 'yellow', 'red', 'green']),
+    new List(['yellow', 'red', 'blue', 'green']),
+  ]),
+  cardsInHand: new List([
+    new List(['yellow', 'red', 'blue', 'green']),
+    new List(['red', 'yellow', 'green', 'blue']),
+    new List(['blue', 'yellow', 'red', 'green']),
+  ]),
 });
 const initialState = new InitialState;
 

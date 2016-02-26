@@ -4,10 +4,11 @@ import immutable from 'immutable'
 import Helmet from 'react-helmet'
 import ColorPicker from './ColorPicker.react'
 import ChipList from './ChipList.react'
+import Card from '../card/Card.react'
 
 if (process.env.IS_BROWSER) {
   require('./Board.styl')
-  require('./Hand.styl')
+  require('./CardContainer.styl')
 }
 
 export default class Board extends Component {
@@ -15,56 +16,32 @@ export default class Board extends Component {
     const {chips, ui: {colorPicker}, actions} = this.props
     const stack1 = new immutable.List(['top-left', 'top-right', 'bottom-left', 'bottom-right'])
     const stack2 = new immutable.List(['center', 'top-right', 'bottom-right', 'bottom-left', 'top-left'])
-    const cards = new immutable.List([
-      new immutable.List(['yellow', 'red', 'blue', 'green']),
-      new immutable.List(['red', 'yellow', 'green', 'blue']),
-      new immutable.List(['blue', 'yellow', 'red', 'green']),
-    ])
+    const cards = chips.get('cardsInHand')
+    const lastPlayedCard = chips.get('playCards').last()
 
     return (
       <div className='board'>
-        <Helmet title='Fifth Element Board Game'></Helmet>
+        <Helmet title='Fifth Element Board Game' />
 
-        <div className='hand-container'>
+        <div className='card-container card-container-stacked'>
+          <Card colors={lastPlayedCard} />
+        </div>
+
+        <div className='card-container'>
           {cards.map((colors, index) =>
-            <div
+            <Card
               key={index}
-              className='card'
+              colors={colors}
               onClick={() => actions.playCard(colors)}
-              >
-              <div className='head'>
-                <div className={'chip chip-' + colors.get(0)}></div>
-              </div>
-
-              <div className='lower'>
-                <div className={'chip chip-' + colors.get(1)}></div>
-                <div className={'chip chip-' + colors.get(2)}></div>
-                <div className={'chip chip-' + colors.get(3)}></div>
-              </div>
-
-            </div>
+              />
           )}
         </div>
 
-        <div className='core-container'>
-          <div className='chip-stack-container'>
-            {stack1.map((position, key) => {
-              const stackId = parseInt([1, key].join(''))
-              return (
-                <div
-                  key={stackId}
-                  id={'stack' + stackId}
-                  className={'chip-stack ' + position}
-                  onClick={() => actions.openColorPicker(stackId)}
-                  >
-                    <ChipList chips={chips.getIn(['map', 'stack' + stackId])}></ChipList>
-                  </div>
-              )
-            })}
-
-            <div className='chip-stack-container chip-stack-container-rotated'>
-              {stack2.map((position, key) => {
-                const stackId = parseInt([2, key].join(''))
+        <div className='board-flex'>
+          <div className='core-container'>
+            <div className='chip-stack-container'>
+              {stack1.map((position, key) => {
+                const stackId = parseInt([1, key].join(''))
                 return (
                   <div
                     key={stackId}
@@ -72,19 +49,35 @@ export default class Board extends Component {
                     className={'chip-stack ' + position}
                     onClick={() => actions.openColorPicker(stackId)}
                     >
-                      <ChipList chips={chips.getIn(['map', 'stack' + stackId])}></ChipList>
+                      <ChipList chips={chips.getIn(['map', 'stack' + stackId])} />
                     </div>
                 )
               })}
+
+              <div className='chip-stack-container chip-stack-container-rotated'>
+                {stack2.map((position, key) => {
+                  const stackId = parseInt([2, key].join(''))
+                  return (
+                    <div
+                      key={stackId}
+                      id={'stack' + stackId}
+                      className={'chip-stack ' + position}
+                      onClick={() => actions.openColorPicker(stackId)}
+                      >
+                        <ChipList chips={chips.getIn(['map', 'stack' + stackId])} />
+                      </div>
+                  )
+                })}
+              </div>
             </div>
+
+            <ColorPicker
+              isOpen={colorPicker.open}
+              stackId={colorPicker.stackId}
+              actions={actions}
+              />
+
           </div>
-
-          <ColorPicker
-            isOpen={colorPicker.open}
-            stackId={colorPicker.stackId}
-            actions={actions}
-            ></ColorPicker>
-
         </div>
       </div>
     )

@@ -1,8 +1,8 @@
-.hand-container
-  position absolute
-  left 16px
-  top 8px
+.card-container
   margin 24px
+  float left
+  position relative
+  width 180px
 
   .card
     width 180px
@@ -11,6 +11,7 @@
     padding 24px
     position relative
     cursor pointer
+    margin-bottom 6px
 
     .chip
       width 40px
@@ -55,3 +56,8 @@
         &:nth-child(2)
           position relative
           top 18px
+
+  &.card-container-stacked
+    .card
+      background-color white
+      position absolute
