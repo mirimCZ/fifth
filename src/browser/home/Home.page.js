@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import React, {PropTypes} from 'react';
 import {FormattedHTMLMessage} from 'react-intl';
 import {Link} from 'react-router';
+import Login from '../auth/Login.react'
 
 export default class Page extends Component {
 
@@ -18,7 +19,7 @@ export default class Page extends Component {
     return (
       <div className="home-page">
         <Helmet title={msg.title} />
-        <p>Homepage...</p>
+        <Login {...this.props} />
       </div>
     );
   }

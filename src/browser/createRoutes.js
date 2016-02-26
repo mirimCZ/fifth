@@ -1,5 +1,5 @@
 import App from './app/App.react'
-import Home from './home/Page.react'
+import Home from './home/Home.page'
 import NotFound from './notfound/Page.react'
 import React from 'react'
 import {IndexRoute, Route} from 'react-router'

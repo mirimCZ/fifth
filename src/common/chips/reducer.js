@@ -81,10 +81,8 @@ export default function chipsReducer(state = initialState, action) {
           return state
         }
 
-
         // check that chips go after each other
         console.log(matchingChips.toObject());
-
 
       }
 

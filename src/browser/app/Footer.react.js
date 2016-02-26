@@ -12,7 +12,7 @@ export default class Footer extends Component {
     const {msg} = this.props;
 
     return (
-      <footer>
+      <footer style={{textAlign: 'right'}}>
         <p>
           Made by <a href="http://www.betterhen.cz" target="_blank">betterhen.cz</a>
         </p>
