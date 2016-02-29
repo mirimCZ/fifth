@@ -1,6 +1,3 @@
-import Chip from './Chip';
-import {Range} from 'immutable';
-
 export const ADD_CHIP = 'ADD_CHIP'
 export const FETCH_CHIPS_ERROR = 'FETCH_CHIPS_ERROR'
 export const FETCH_CHIPS_START = 'FETCH_CHIPS_START'

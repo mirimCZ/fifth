@@ -1,6 +1,6 @@
 import Component from 'react-pure-render/component'
 import React, {PropTypes} from 'react'
-import immutable from 'immutable'
+import {List} from 'immutable'
 import Helmet from 'react-helmet'
 import ColorPicker from './ColorPicker.react'
 import ChipList from './ChipList.react'
@@ -14,17 +14,27 @@ if (process.env.IS_BROWSER) {
 export default class Board extends Component {
   render() {
     const {chips, ui: {colorPicker}, actions} = this.props
-    const stack1 = new immutable.List(['top-left', 'top-right', 'bottom-left', 'bottom-right'])
-    const stack2 = new immutable.List(['center', 'top-right', 'bottom-right', 'bottom-left', 'top-left'])
+    const stack1 = new List(['top-left', 'top-right', 'bottom-left', 'bottom-right'])
+    const stack2 = new List(['center', 'top-right', 'bottom-right', 'bottom-left', 'top-left'])
     const cards = chips.get('cardsInHand')
     const lastPlayedCard = chips.get('playCards').last()
+    const numberOfCardsInPlayersHands = 3
 
     return (
       <div className='board'>
         <Helmet title='Fifth Element Board Game' />
 
         <div className='card-container card-container-stacked'>
-          <Card colors={lastPlayedCard} />
+          <div className='played-cards'>
+            <span>{chips.get('playCards').size}</span>
+            <Card colors={lastPlayedCard} />
+          </div>
+          <div className='cards-in-stack'>
+            <div className='card'>
+              <p>5th ELEMENT</p>
+            </div>
+            <span>{48 - chips.get('playCards').size - numberOfCardsInPlayersHands}</span>
+          </div>
         </div>
 
         <div className='card-container'>

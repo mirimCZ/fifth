@@ -1,25 +1,26 @@
 import * as actions from './actions';
 import Chip from './Chip';
 import {Map, List, Record} from 'immutable';
+import findSequence from './find'
 
 const InitialState = Record({
   map: Map({
     stack10: new List(),
     stack11: new List([
-      new Chip({stackId: 11, color: 'green'})
+      //new Chip({stackId: 11, color: 'green'})
     ]),
     stack12: new List(),
     stack13: new List(),
     stack20: new List([
-      new Chip({stackId: 20, color: 'yellow'})
+      //new Chip({stackId: 20, color: 'yellow'})
     ]), // head stack
     stack21: new List([
-      new Chip({stackId: 21, color: 'blue'})
+      //new Chip({stackId: 21, color: 'blue'})
     ]),
     stack22: new List(),
     stack23: new List(),
     stack24: new List([
-      new Chip({stackId: 24, color: 'red'})
+      //new Chip({stackId: 24, color: 'red'})
     ]),
   }),
   stacksOrder: new List([24, 10, 23, 12, 22, 13, 21, 11]),
@@ -47,11 +48,12 @@ const InitialState = Record({
     new List(['red', 'yellow', 'green', 'blue']),
     new List(['blue', 'yellow', 'red', 'green']),
   ]),
+  winningCards: new List([])
 });
 const initialState = new InitialState;
 
 // TODO fix
-const revive = ({list}) => initialState
+const revive = () => initialState
 
 export default function chipsReducer(state = initialState, action) {
   if (!(state instanceof InitialState)) return revive(state);
@@ -93,12 +95,12 @@ export default function chipsReducer(state = initialState, action) {
               const lastChipColor = stack.last().get('color')
 
               if (cardWithoutHead.find(color => color === lastChipColor)) {
-                return result.set(stackId, stack.last())
+                return result.push(stackId)
               }
             }
 
             return result
-          }, new Map())
+          }, new List())
 
         if (matchingChips.size < 3) {
           // colors dont match
@@ -106,8 +108,12 @@ export default function chipsReducer(state = initialState, action) {
         }
 
         // check that chips go after each other
-        console.log(matchingChips.toObject());
+        console.log(state.get('stacksOrder').toArray());
+        console.log(matchingChips.toArray());
+        console.log(findSequence(state.get('stacksOrder'), matchingChips));
 
+        // if success - move card to winning
+        // request new card to this player hand
       }
 
       return state

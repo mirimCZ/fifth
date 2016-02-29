@@ -13,6 +13,7 @@
     "no-floating-decimal": 0,
     "no-param-reassign": 0,
     "no-shadow": 0,
+    "semi": 0,
     "no-unused-expressions": 0,
     "no-use-before-define": [2, "nofunc"],
     "object-curly-spacing": [2, "never"],
@@ -51,5 +52,3 @@
     }
   }
 }
-
-
