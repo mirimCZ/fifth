@@ -8,24 +8,23 @@ export const PLAY_CARD = 'PLAY_CARD'
 export function addChip(stackId, color) {
   return {
     type: ADD_CHIP,
-    payload: {stackId, color}
-  };
+    payload: {stackId, color},
+  }
 }
 
 export function playCard(card) {
   return {
     type: PLAY_CARD,
-    payload: {card}
-  };
+    payload: {card},
+  }
 }
 
-export function fetchChips(/* {location, params} */) {
-  // We can use location and params to create custom endpoint.
+export function fetchChips() {
   return ({fetch}) => ({
     type: 'FETCH_CHIPS',
     payload: {
       promise: fetch('api/v1/chips/list')
         .then(response => response.json())
-    }
-  });
+    },
+  })
 }

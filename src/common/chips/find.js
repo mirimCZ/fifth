@@ -6,24 +6,33 @@ import {List} from 'immutable'
 // slicing moves number 5 to the begging of array
 // and indexOf gets the first indexIt finds - but thats wrong index
 export default function find(hayshack, needle) {
+  console.log('h', hayshack.toArray());
+  console.log('n', needle.toArray());
   return simpleFind(hayshack, needle)
   || simpleFind(hayshack.reverse(), needle)
   || extremesFind(hayshack, needle)
 }
 
 function simpleFind(hayshack, needle) {
-  console.log('---------------------------');
-  console.log('  in', hayshack.toArray());
-  console.log('find', needle.toArray());
   let match = 0
   let lastIndex = -1
-
+  console.log('----NEW RUN----');
   needle.map((value) => {
-    const myIndex = hayshack.indexOf(value)
+    // TODO: implement here i need to find all indexes of given value
+    // and then filter them all in helper functions?
+    // wouldnt this cause mistake positives? it might... test it
+    const matches = hayshack.filterIndexes(hayValue => hayValue === value)
+    console.log('m', matches);
+    /*
     if(isFirstMatch(myIndex, lastIndex) || isIndexAfter(myIndex, lastIndex)) {
       lastIndex = myIndex
       match++
+      console.log('match', value, match);
+    } else {
+      match = 0
+      console.log('wrong', value);
     }
+    */
   })
 
   return (match >= needle.size)

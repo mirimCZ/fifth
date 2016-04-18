@@ -16,7 +16,7 @@ export default class ChipList extends Component {
             key={index}
             className={'chip chip-' + chip.get('color')}
             style={{
-              left: index * 3,
+              left: index * 2,
               top: index * -8
             }}
             ></div>

@@ -7,20 +7,20 @@ const InitialState = Record({
   map: Map({
     stack10: new List(),
     stack11: new List([
-      //new Chip({stackId: 11, color: 'green'})
+      new Chip({stackId: 11, color: 'green'})
     ]),
     stack12: new List(),
     stack13: new List(),
     stack20: new List([
-      //new Chip({stackId: 20, color: 'yellow'})
+      new Chip({stackId: 20, color: 'yellow'})
     ]), // head stack
     stack21: new List([
-      //new Chip({stackId: 21, color: 'blue'})
+      new Chip({stackId: 21, color: 'blue'})
     ]),
     stack22: new List(),
     stack23: new List(),
     stack24: new List([
-      //new Chip({stackId: 24, color: 'red'})
+      new Chip({stackId: 24, color: 'red'})
     ]),
   }),
   stacksOrder: new List([24, 10, 23, 12, 22, 13, 21, 11]),
@@ -87,30 +87,25 @@ export default function chipsReducer(state = initialState, action) {
         return state
       } else {
         const cardWithoutHead = card.shift()
-        const matchingChips = state
+        const colorCodes = new Map({
+          yellow: 1,
+          red: 2,
+          green: 3,
+          blue: 4,
+        })
+        const lastChipColors = state
           .get('stacksOrder')
           .reduce((result, stackId) => {
             const stack = state.getIn(['map', 'stack' + stackId])
             if (stack.last()) {
-              const lastChipColor = stack.last().get('color')
-
-              if (cardWithoutHead.find(color => color === lastChipColor)) {
-                return result.push(stackId)
-              }
+              return result.push(colorCodes.get(stack.last().get('color')))
+            } else {
+              return result.push(0)
             }
-
-            return result
           }, new List())
 
-        if (matchingChips.size < 3) {
-          // colors dont match
-          return state
-        }
-
         // check that chips go after each other
-        console.log(state.get('stacksOrder').toArray());
-        console.log(matchingChips.toArray());
-        console.log(findSequence(state.get('stacksOrder'), matchingChips));
+        console.log(findSequence(lastChipColors, cardWithoutHead.map(card => colorCodes.get(card))));
 
         // if success - move card to winning
         // request new card to this player hand
@@ -118,8 +113,6 @@ export default function chipsReducer(state = initialState, action) {
 
       return state
     }
-
-
   }
 
   return state;
